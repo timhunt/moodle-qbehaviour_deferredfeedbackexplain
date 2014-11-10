@@ -17,8 +17,7 @@ However, it may be used in various ways, for example
 
 This is a standard question behaviour, and so is installed in any of the usual ways.
 
-Once this behaviour has been published, you can install it from the Moodle
-plugins directory:
+You can install it from the Moodle plugins directory:
 https://moodle.org/plugins/view.php?plugin=qbehaviour_deferredfeedbackexplain
 
 Alternatively, you can download the zip file from here:
