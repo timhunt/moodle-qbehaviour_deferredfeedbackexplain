@@ -45,7 +45,7 @@ class qbehaviour_deferredfeedbackexplain_renderer extends qbehaviour_renderer {
      * @param question_display_options $options controls what should and should not be displayed.
      * @return string HTML fragment.
      */
-    protected function explanation(question_attempt$qa, question_display_options $options) {
+    protected function explanation(question_attempt $qa, question_display_options $options) {
         $step = $qa->get_last_step_with_behaviour_var('explanation');
 
         if (empty($options->readonly)) {
