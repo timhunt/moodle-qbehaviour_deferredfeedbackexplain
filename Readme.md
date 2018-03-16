@@ -1,4 +1,5 @@
 # Deferred feedback with explanation question behaviour
+https://moodle.org/plugins/qbehaviour_deferredfeedbackexplain
 
 This Moodle question behaviour was created by Tim Hunt.
 
