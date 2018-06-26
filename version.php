@@ -24,12 +24,12 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2018021600;
-$plugin->requires  = 2016120500;
+$plugin->version   = 2018062601; // The current plugin version (Date: YYYYMMDDXX).
+$plugin->requires  = 2016120500; // 2016120500 is Moodle 3.2.0 .
 $plugin->cron      = 0;
 $plugin->component = 'qbehaviour_deferredfeedbackexplain';
 $plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = 'Version 1.1 for Moodle 3.2+';
+$plugin->release   = 'Version 1.2 for Moodle 3.2+';
 
 $plugin->dependencies = array(
     'qbehaviour_deferredfeedback' => 2016120500

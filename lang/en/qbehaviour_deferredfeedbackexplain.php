@@ -24,4 +24,5 @@
 
 $string['pleaseexplain'] = 'Give your reasons';
 $string['pluginname'] = 'Deferred feedback with explanation';
+$string['privacy:metadata'] = 'The Deferred feedback with explanation question behaviour plugin does not store any personal data.';
 $string['responsewithreason'] = '{$a->response} | Reason: {$a->explanation}';
