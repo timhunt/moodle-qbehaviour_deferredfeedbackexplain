@@ -60,7 +60,7 @@ class qbehaviour_deferredfeedbackexplain_renderer extends qbehaviour_renderer {
     /**
      * Render the explanation in read-only form.
      * @param question_attempt $qa a question attempt.
-     * @param question_attempt_setp $step from which to get the current explanation.
+     * @param question_attempt_step $step from which to get the current explanation.
      * @param question_display_options $options controls what should and should not be displayed.
      * @return string HTML fragment.
      */
@@ -81,7 +81,7 @@ class qbehaviour_deferredfeedbackexplain_renderer extends qbehaviour_renderer {
     /**
      * Render the explanation in a HTML editor.
      * @param question_attempt $qa a question attempt.
-     * @param question_attempt_setp $step from which to get the current explanation.
+     * @param question_attempt_step $step from which to get the current explanation.
      * @param question_display_options $options controls what should and should not be displayed.
      * @return string HTML fragment.
      */
