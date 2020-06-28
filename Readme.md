@@ -1,4 +1,4 @@
-# Deferred feedback with explanation question behaviour
+# Deferred feedback with explanation question behaviour [![Build Status](https://travis-ci.com/timhunt/moodle-qbehaviour_deferredfeedbackexplain.svg?branch=master)](https://travis-ci.com/timhunt/moodle-qbehaviour_deferredfeedbackexplain)
 https://moodle.org/plugins/qbehaviour_deferredfeedbackexplain
 
 This Moodle question behaviour was created by Tim Hunt.
