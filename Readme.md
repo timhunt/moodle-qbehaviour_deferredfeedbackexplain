@@ -1,4 +1,4 @@
-# Deferred feedback with explanation question behaviour [![Build Status](https://travis-ci.com/timhunt/moodle-qbehaviour_deferredfeedbackexplain.svg?branch=master)](https://travis-ci.com/timhunt/moodle-qbehaviour_deferredfeedbackexplain)
+# Deferred feedback with explanation question behaviour
 https://moodle.org/plugins/qbehaviour_deferredfeedbackexplain
 
 This Moodle question behaviour was created by Tim Hunt.
@@ -14,7 +14,7 @@ However, it may be used in various ways, for example
 1. The teacher may want to manually edit the grades where the student gave a wrong answer, to give partial credit if the student used the right method or approach.
 2. The student might want to explain their thinking, so that later, when the results and feedback are revealed, they are reminded of what they were thinking at the time, and so can reflect more deeply.
 
-## How to install
+## How to install
 
 This is a standard question behaviour, and so is installed in any of the usual ways.
 
