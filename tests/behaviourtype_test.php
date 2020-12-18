@@ -40,7 +40,7 @@ class qbehaviour_deferredfeedbackexplain_type_test extends qbehaviour_walkthroug
     /** @var qbehaviour_deferredfeedbackexplain_type */
     protected $behaviourtype;
 
-    public function setUp() {
+    public function setUp(): void {
         parent::setUp();
         $this->behaviourtype = question_engine::get_behaviour_type('deferredfeedbackexplain');
     }
