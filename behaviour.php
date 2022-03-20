@@ -14,8 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+defined('MOODLE_INTERNAL') || die();
+
+require_once(dirname(__FILE__) . '/../deferredfeedback/behaviour.php');
+
 /**
- * Deferred feedback with explanation question behaviour.
+ * Question behaviour for deferred feedback with explanation.
  *
  * This is like the standard deferred feedback behaviour, but with an extra
  * text input box where the student can explain their reasoning. That part is
@@ -27,59 +31,40 @@
  * @copyright 2014 Tim Hunt
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-
-defined('MOODLE_INTERNAL') || die();
-
-require_once(dirname(__FILE__) . '/../deferredfeedback/behaviour.php');
-
-
-/**
- * Question behaviour for deferred feedback with explanation.
- *
- * This is like the standard deferred feedback behaviour, but with an extra
- * text input box where the student can explain their reasoning. That part is
- * un-graded, but the teacher could read it later and manually adjust the marks
- * based on it. The student can also review it later, to be reminded what they
- * were thinking at the time they answered the question.
- *
- * @copyright 2014 Tim Hunt
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
 class qbehaviour_deferredfeedbackexplain extends qbehaviour_deferredfeedback {
-    public function get_expected_data() {
+    public function get_expected_data(): array {
         if ($this->qa->get_state()->is_active()) {
-            return array(
+            return [
                 'explanation'       => PARAM_RAW,
                 'explanationformat' => PARAM_ALPHANUMEXT
-            );
+            ];
         }
         return parent::get_expected_data();
     }
 
-    protected function get_our_resume_data() {
+    protected function get_our_resume_data(): array {
         $lastexplanation = $this->qa->get_last_behaviour_var('explanation');
         if ($lastexplanation) {
-            return array(
+            return [
                 '-explanation'       => $lastexplanation,
                 '-explanationformat' => $this->qa->get_last_behaviour_var('explanationformat'),
-            );
+            ];
         } else {
-            return array();
+            return [];
         }
     }
 
-    protected function is_same_response(question_attempt_step $pendingstep) {
+    protected function is_same_response(question_attempt_step $pendingstep): bool {
         return parent::is_same_response($pendingstep) &&
                 $this->qa->get_last_behaviour_var('explanation') == $pendingstep->get_behaviour_var('explanation') &&
                 $this->qa->get_last_behaviour_var('explanationformat') == $pendingstep->get_behaviour_var('explanationformat');
     }
 
-    public function summarise_action(question_attempt_step $step) {
+    public function summarise_action(question_attempt_step $step): string {
         return $this->add_explanation(parent::summarise_action($step), $step);
     }
 
-    public function process_action(question_attempt_pending_step $pendingstep) {
+    public function process_action(question_attempt_pending_step $pendingstep): bool {
         $result = parent::process_action($pendingstep);
 
         if ($result == question_attempt::KEEP && $pendingstep->response_summary_changed()) {
@@ -91,7 +76,7 @@ class qbehaviour_deferredfeedbackexplain extends qbehaviour_deferredfeedback {
         return $result;
     }
 
-    protected function add_explanation($text, question_attempt_step $step) {
+    protected function add_explanation($text, question_attempt_step $step): string {
         $explanation = $step->get_behaviour_var('explanation');
         if (!$explanation) {
             return $text;
@@ -100,7 +85,7 @@ class qbehaviour_deferredfeedbackexplain extends qbehaviour_deferredfeedback {
         $a = new stdClass();
         $a->response = $text;
         $a->explanation = question_utils::to_plain_text($explanation,
-                $step->get_behaviour_var('explanationformat'), array('para' => false));
+                $step->get_behaviour_var('explanationformat'), ['para' => false]);
         return get_string('responsewithreason', 'qbehaviour_deferredfeedbackexplain', $a);
     }
 }

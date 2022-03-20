@@ -14,23 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * Question behaviour type for deferred feedback with explanation behaviour.
- *
- * @package   qbehaviour_deferredfeedbackexplain
- * @copyright 2014 Tim Hunt
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
-
 defined('MOODLE_INTERNAL') || die();
 
 require_once(dirname(__FILE__) . '/../deferredfeedback/behaviourtype.php');
 
-
 /**
  * Question behaviour type information for deferred feedback with explanation behaviour.
  *
+ * @package   qbehaviour_deferredfeedbackexplain
  * @copyright 2014 Tim Hunt
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

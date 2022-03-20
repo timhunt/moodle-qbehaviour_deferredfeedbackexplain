@@ -14,35 +14,30 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+namespace qbehaviour_deferredfeedbackexplain;
+
+use qbehaviour_deferredfeedbackexplain_type;
+
+defined('MOODLE_INTERNAL') || die();
+
+require_once(dirname(__FILE__) . '/../../../engine/lib.php');
+require_once(dirname(__FILE__) . '/../../../engine/tests/helpers.php');
+
 /**
- * This file contains tests for the deferred feedback with explanation behaviour.
+ * Unit tests for the deferred feedback with explanation behaviour.
  *
  * @package   qbehaviour_deferredfeedbackexplain
  * @copyright 2014 Tim Hunt
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-defined('MOODLE_INTERNAL') || die();
-
-global $CFG;
-require_once(dirname(__FILE__) . '/../../../engine/lib.php');
-require_once(dirname(__FILE__) . '/../../../engine/tests/helpers.php');
-
-
-/**
- * Unit tests for the deferred feedback with explanation behaviour.
- *
- * @copyright 2014 Tim Hunt
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-class qbehaviour_deferredfeedbackexplain_type_test extends qbehaviour_walkthrough_test_base {
+class behaviourtype_test extends \qbehaviour_walkthrough_test_base {
 
     /** @var qbehaviour_deferredfeedbackexplain_type */
     protected $behaviourtype;
 
     public function setUp(): void {
         parent::setUp();
-        $this->behaviourtype = question_engine::get_behaviour_type('deferredfeedbackexplain');
+        $this->behaviourtype = \question_engine::get_behaviour_type('deferredfeedbackexplain');
     }
 
     public function test_is_archetypal() {
@@ -50,7 +45,7 @@ class qbehaviour_deferredfeedbackexplain_type_test extends qbehaviour_walkthroug
     }
 
     public function test_get_unused_display_options() {
-        $this->assertEquals(array('correctness', 'marks', 'specificfeedback', 'generalfeedback', 'rightanswer'),
+        $this->assertEquals(['correctness', 'marks', 'specificfeedback', 'generalfeedback', 'rightanswer'],
                 $this->behaviourtype->get_unused_display_options());
     }
 

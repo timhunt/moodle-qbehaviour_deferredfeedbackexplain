@@ -24,13 +24,13 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2018021600;
-$plugin->requires  = 2016120500;
+$plugin->version   = 2022032000;
+$plugin->requires  = 2020061500;
 $plugin->cron      = 0;
 $plugin->component = 'qbehaviour_deferredfeedbackexplain';
 $plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = 'Version 1.1 for Moodle 3.2+';
+$plugin->release   = 'Version 1.2 for Moodle 3.9+';
 
-$plugin->dependencies = array(
-    'qbehaviour_deferredfeedback' => 2016120500
-);
+$plugin->dependencies = [
+    'qbehaviour_deferredfeedback' => 2020061500,
+];

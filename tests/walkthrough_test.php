@@ -14,30 +14,28 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+namespace qbehaviour_deferredfeedbackexplain;
+
+defined('MOODLE_INTERNAL') || die();
+
+require_once(dirname(__FILE__) . '/../../../engine/lib.php');
+require_once(dirname(__FILE__) . '/../../../engine/tests/helpers.php');
+
 /**
- * This file contains walk-through tests for the deferred feedback with explanation behaviour.
+ * Walk-through tests for the deferred feedback with explanation behaviour.
  *
  * @package   qbehaviour_deferredfeedbackexplain
  * @copyright 2014 Tim Hunt
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+class walkthrough_test extends \qbehaviour_walkthrough_test_base {
 
-
-defined('MOODLE_INTERNAL') || die();
-
-global $CFG;
-require_once(dirname(__FILE__) . '/../../../engine/lib.php');
-require_once(dirname(__FILE__) . '/../../../engine/tests/helpers.php');
-
-
-/**
- * Walk-through tests for the deferred feedback with explanation behaviour.
- *
- * @copyright 2014 Tim Hunt
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-class qbehaviour_deferredfeedbackexplain_walkthrough_test extends qbehaviour_walkthrough_test_base {
-
+    /**
+     * Assert that the current output contains a text area with given content.
+     *
+     * @param string $name name of the textarea. (Prefix is prepended.)
+     * @param string $content the expected content.
+     */
     protected function check_contains_textarea($name, $content) {
         $fieldname = $this->quba->get_field_prefix($this->slot) . $name;
 
@@ -45,8 +43,13 @@ class qbehaviour_deferredfeedbackexplain_walkthrough_test extends qbehaviour_wal
                 'attributes' => array('cols' => '60', 'rows' => 5, 'name' => $fieldname)),
                 $this->currentoutput);
 
-        if ($content) {
-            $this->assertRegExp('/' . preg_quote(s($content), '/') . '/', $this->currentoutput);
+        if (method_exists($this, 'assertMatchesRegularExpression')) {
+            $this->assertMatchesRegularExpression('/' . preg_quote(s($content), '/') . '/',
+                    $this->currentoutput);
+        } else {
+            // Fallback for old PHPunit.
+            $this->assertRegExp('/' . preg_quote(s($content), '/') . '/',
+                    $this->currentoutput);
         }
     }
 
@@ -58,11 +61,11 @@ class qbehaviour_deferredfeedbackexplain_walkthrough_test extends qbehaviour_wal
         $PAGE->set_url('/');
 
         // Create a true-false question with correct answer true.
-        $tf = test_question_maker::make_question('truefalse', 'true');
+        $tf = \test_question_maker::make_question('truefalse', 'true');
         $this->start_attempt_at_question($tf, 'deferredfeedbackexplain', 1);
 
         // Verify.
-        $this->check_current_state(question_state::$todo);
+        $this->check_current_state(\question_state::$todo);
         $this->check_current_mark(null);
         $this->render();
         $this->check_output_contains_lang_string('notyetanswered', 'question');
@@ -75,10 +78,10 @@ class qbehaviour_deferredfeedbackexplain_walkthrough_test extends qbehaviour_wal
                 $this->get_does_not_contain_feedback_expectation());
 
         // Save a response with no explanation.
-        $this->process_submission(array('answer' => 1, '-explanation' => '', '-explanationformat' => FORMAT_HTML));
+        $this->process_submission(['answer' => 1, '-explanation' => '', '-explanationformat' => FORMAT_HTML]);
 
         // Verify.
-        $this->check_current_state(question_state::$complete);
+        $this->check_current_state(\question_state::$complete);
         $this->check_current_mark(null);
         $this->render();
         $this->check_output_contains_lang_string('answersaved', 'question');
@@ -91,10 +94,10 @@ class qbehaviour_deferredfeedbackexplain_walkthrough_test extends qbehaviour_wal
                 $this->get_does_not_contain_feedback_expectation());
 
         // Save a response adding an explanation.
-        $this->process_submission(array('answer' => 1, '-explanation' => 'I just know this', '-explanationformat' => FORMAT_HTML));
+        $this->process_submission(['answer' => 1, '-explanation' => 'I just know this', '-explanationformat' => FORMAT_HTML]);
 
         // Verify.
-        $this->check_current_state(question_state::$complete);
+        $this->check_current_state(\question_state::$complete);
         $this->check_current_mark(null);
         $this->render();
         $this->check_output_contains_lang_string('answersaved', 'question');
@@ -108,14 +111,14 @@ class qbehaviour_deferredfeedbackexplain_walkthrough_test extends qbehaviour_wal
 
         // Process the same data again, check it does not create a new step.
         $numsteps = $this->get_step_count();
-        $this->process_submission(array('answer' => 1, '-explanation' => 'I just know this', '-explanationformat' => FORMAT_HTML));
+        $this->process_submission(['answer' => 1, '-explanation' => 'I just know this', '-explanationformat' => FORMAT_HTML]);
                 $this->check_step_count($numsteps);
 
         // Finish the attempt.
         $this->quba->finish_all_questions();
 
         // Verify.
-        $this->check_current_state(question_state::$gradedright);
+        $this->check_current_state(\question_state::$gradedright);
         $this->check_current_mark(1);
         $this->render();
         $this->check_output_contains_lang_string('pleaseexplain', 'qbehaviour_deferredfeedbackexplain');
